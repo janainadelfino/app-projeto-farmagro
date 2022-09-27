@@ -1,0 +1,10 @@
+{
+  "expo": {
+    "name": "app-projeto-farmagro",
+    "slug": "app-projeto-farmagro",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
