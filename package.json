@@ -21,5 +21,6 @@
     "@babel/core": "^7.12.9",
     "prettier": "^2.7.1"
   },
+  "format": "prettier --write \"src/**/*.{js,jsx}\"",
   "private": true
 }
