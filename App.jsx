@@ -10,7 +10,7 @@ export default function App() {
     <NavigationContainer >
       <NativeBaseProvider theme={THEME}>
         <StatusBar 
-          barStyle="light-content"
+          barStyle="dark-content"
           backgroundColor="transparent"
           translucent
         />
