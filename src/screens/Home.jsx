@@ -20,14 +20,13 @@ export function Home() {
   return (
     <VStack flex={1} mb={10} bg="#FFFFFF">
       <VStack>
-        <Center py="8">
+        <Center py="-2">
           <Image
             source={{
               uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDV6XWKl0A-rWwoqzNNCH_VkUdojQ4jIU41w&usqp=CAU",
             }}
-            size="xl"
-            w="38"
-            h="38"
+            size="md"
+            w="10%"
             alt="Imagem da logo"
           />
           <Heading size={"xs"}>AgroTech</Heading>
@@ -39,8 +38,7 @@ export function Home() {
         alignSelf="center"
         my="4"
         space={5}
-        w="100%"
-        maxW="300px"
+        w="85%"
         divider={
           <Box px="2">
             <Divider />
@@ -51,9 +49,8 @@ export function Home() {
           <Input
             placeholder="Pesquisar"
             variant="filled"
-            width="100%"
             borderRadius="10"
-            py="-2"
+            py="2"
             px="2"
             InputLeftElement={
               <Icon
@@ -68,8 +65,8 @@ export function Home() {
       </VStack>
 
      <VStack alignItems="center">
-      <Stack direction="row" mb="2.5" mt="2" space={1}>
-        <Box px="5">
+      <Stack direction="row" mb="2" mt="2">
+        <Box>
           <Box rounded="lg" overflow="hidden">
             <Box>
               <AspectRatio w="100" h="100" rounded="lg" overflow="hidden">
@@ -108,7 +105,7 @@ export function Home() {
           </Box>
         </Box>
 
-        <Box px="5">
+        <Box>
         <Box rounded="lg" overflow="hidden">
           <Box>
             <AspectRatio w="100" h="100" rounded="lg" overflow="hidden">
@@ -152,7 +149,7 @@ export function Home() {
 
      <VStack alignItems="center">
       <Stack direction="row" mb="2.5" mt="2" space={1}>
-        <Box px="5">
+        <Box>
           <Box rounded="lg" overflow="hidden">
             <Box>
               <AspectRatio w="100" h="100" rounded="lg" overflow="hidden">
@@ -191,7 +188,7 @@ export function Home() {
           </Box>
         </Box>
 
-        <Box px="5">
+        <Box>
         <Box rounded="lg" overflow="hidden">
           <Box>
             <AspectRatio w="100" h="100" rounded="lg" overflow="hidden">
