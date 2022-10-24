@@ -37,7 +37,7 @@ export function Routes() {
       />
 
       <Drawer.Screen
-        name="Histórico"
+        name="HistÃ³rico"
         component={Home}
         options={{
           drawerIcon: ({ focused, size, color }) => (
