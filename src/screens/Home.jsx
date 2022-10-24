@@ -15,8 +15,30 @@ import {
   Container,
 } from "native-base";
 import { Ionicons } from "@expo/vector-icons";
+import { Api } from "../services/api";
+import { useEffect, useState } from "react";
 
 export function Home() {
+  const [planta, setPlanta] = useState([])
+  const [idimage, setImage] = useState([])
+
+  async function fetchDados(){
+    await Api.get('/planta/')
+    .then(response => setPlanta(response.data))
+    .catch(error => alert(error))
+  }
+
+  async function fetchImage(){
+    await Api.get(`image/favorita/${idimage}`)
+    .then(response => setImage(response.data))
+    .catch(error => alert(error))
+  }
+
+  useEffect(() => {
+    fetchDados()
+    fetchImage()
+  },[])
+  
   return (
     <VStack flex={1} mb={10} bg="#FFFFFF">
       <VStack>
@@ -26,7 +48,7 @@ export function Home() {
               uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDV6XWKl0A-rWwoqzNNCH_VkUdojQ4jIU41w&usqp=CAU",
             }}
             size="md"
-            w="10%"
+            w="10%"            
             alt="Imagem da logo"
           />
           <Heading size={"xs"}>AgroTech</Heading>
@@ -39,6 +61,7 @@ export function Home() {
         my="4"
         space={5}
         w="85%"
+        
         divider={
           <Box px="2">
             <Divider />
@@ -49,6 +72,7 @@ export function Home() {
           <Input
             placeholder="Pesquisar"
             variant="filled"
+            
             borderRadius="10"
             py="2"
             px="2"
@@ -63,12 +87,13 @@ export function Home() {
           />
         </VStack>
       </VStack>
-
+          
      <VStack alignItems="center">
       <Stack direction="row" mb="2" mt="2">
-        <Box>
+        { planta.map(plant => (
+          <Box>
           <Box rounded="lg" overflow="hidden">
-            <Box>
+            <Box px="8">
               <AspectRatio w="100" h="100" rounded="lg" overflow="hidden">
                 <Image
                   source={{
@@ -84,29 +109,24 @@ export function Home() {
                 <Heading
                   color="white"
                   position="absolute"
-                  bottom="9"
-                  py="3.5"
-                  px="18.5"
+                  bottom="1"                  
+                  py="5"
+                  px="16"
                 >
-                  Melissa
+                  { plant.nomeCientifico }
                 </Heading>
               </Stack>
-              <Text
-                fontWeight="300"
-                position="relative"
-                bottom="9"
-                color="white"
-                px="1.5"
-                py="-1.5"
-              >
-                (Melissa officinalis)
-              </Text>
             </Stack>
           </Box>
         </Box>
+        )) }  
 
-        <Box>
-        <Box rounded="lg" overflow="hidden">
+        
+   
+      { planta.map(plant => ( 
+        /*2 Bloco */
+        <Box px="5">
+        <Box rounded="lg" overflow="hidden" >
           <Box>
             <AspectRatio w="100" h="100" rounded="lg" overflow="hidden">
               <Image
@@ -123,115 +143,19 @@ export function Home() {
               <Heading
                 color="white"
                 position="absolute"
-                bottom="9"
-                py="3.5"
-                px="18.5"
+                bottom="4"
+                py="2"
+                px="10"
               >
-                Melissa
+                { plant.nomeCientifico }
               </Heading>
-            </Stack>
-            <Text
-              fontWeight="300"
-              position="relative"
-              bottom="9"
-              color="white"
-              px="1.5"
-              py="-1.5"
-            >
-              (Melissa officinalis)
-            </Text>
+            </Stack>         
           </Stack>
         </Box>
       </Box>
-            
+      ))}      
       </Stack> 
      </VStack>
-
-     <VStack alignItems="center">
-      <Stack direction="row" mb="2.5" mt="2" space={1}>
-        <Box>
-          <Box rounded="lg" overflow="hidden">
-            <Box>
-              <AspectRatio w="100" h="100" rounded="lg" overflow="hidden">
-                <Image
-                  source={{
-                    uri: "https://images.tcdn.com.br/img/img_prod/799330/erva_cidreira_melissa_459_1_20200523155701.jpg",
-                  }}
-                  alt="image"
-                />
-              </AspectRatio>
-            </Box>
-
-            <Stack>
-              <Stack>
-                <Heading
-                  color="white"
-                  position="absolute"
-                  bottom="9"
-                  py="3.5"
-                  px="18.5"
-                >
-                  Melissa
-                </Heading>
-              </Stack>
-              <Text
-                fontWeight="300"
-                position="relative"
-                bottom="9"
-                color="white"
-                px="1.5"
-                py="-1.5"
-              >
-                (Melissa officinalis)
-              </Text>
-            </Stack>
-          </Box>
-        </Box>
-
-        <Box>
-        <Box rounded="lg" overflow="hidden">
-          <Box>
-            <AspectRatio w="100" h="100" rounded="lg" overflow="hidden">
-              <Image
-                source={{
-                  uri: "https://images.tcdn.com.br/img/img_prod/799330/erva_cidreira_melissa_459_1_20200523155701.jpg",
-                }}
-                alt="image"
-              />
-            </AspectRatio>
-          </Box>
-
-          <Stack>
-            <Stack>
-              <Heading
-                color="white"
-                position="absolute"
-                bottom="9"
-                py="3.5"
-                px="18.5"
-              >
-                Melissa
-              </Heading>
-            </Stack>
-            <Text
-              fontWeight="300"
-              position="relative"
-              bottom="9"
-              color="white"
-              px="1.5"
-              py="-1.5"
-            >
-              (Melissa officinalis)
-            </Text>
-          </Stack>
-        </Box>
-      </Box>
-            
-      </Stack> 
-     </VStack>            
-      
-
-     
     </VStack>
   );
 }
