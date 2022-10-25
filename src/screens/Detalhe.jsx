@@ -1,9 +1,11 @@
-import { Text, View } from "native-base";
+import { Text, View, VStack } from "native-base";
+import { Header } from "../components/Header";
 
 export function Detalhe(){
   return (
-    <View>
+    <VStack>
+      <Header voltar />
       <Text>Detalhe</Text>
-    </View>
+    </VStack>
   )
 }
