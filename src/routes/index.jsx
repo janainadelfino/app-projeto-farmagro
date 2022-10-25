@@ -16,7 +16,6 @@ export function Routes() {
       <Drawer.Screen
         name="Home"
         component={Home}
-
        
         options={{
           drawerIcon: ({ focused, size, color }) => (
