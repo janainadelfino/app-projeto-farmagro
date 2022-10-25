@@ -10,7 +10,6 @@ import {
   Icon,
   AspectRatio,
   Stack,
-  Text,
   ZStack,
   ScrollView,
   Container,

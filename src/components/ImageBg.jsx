@@ -1,4 +1,4 @@
-import { AspectRatio, Box, Text, View } from "native-base";
+import { AspectRatio, Box, View } from "native-base";
 import { useEffect, useState } from "react";
 import { Image } from "react-native";
 import { Api } from "../services/api";

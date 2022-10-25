@@ -2,17 +2,27 @@ import { AspectRatio, Box, Button, FlatList, Heading, HStack, Image, Stack } fro
 import { useState } from "react";
 import { limitDescription } from "../utils/text";
 import { ImageBg } from "./ImageBg";
+import { useNavigation, CommonActions  } from '@react-navigation/native'
 
 
 export function Lista({ data }){
   const [cont, setCont] = useState(0);
   
+  const navigation = useNavigation();
+
   return (
     <FlatList  data={data} numColumns={2} renderItem={({
       item, index
     }) =>
     <>
-      <Button variant="ghost" p={0} flex={1} justifyContent="center" mx={4} alignItems="center"  my={4}>
+      <Button variant="ghost" p={0} flex={1} justifyContent="center" mx={4} alignItems="center"  my={4} onPress={() => {
+        navigation.dispatch(
+          CommonActions.navigate({
+            name: 'Detalhe',
+            params: { id: item.id },
+          })
+        )
+      }}>
         <Box  maxHeight="200"  >
           <AspectRatio  w="100%" maxW={300} maxH={200} ratio={16 / 12} >
             <ImageBg 
