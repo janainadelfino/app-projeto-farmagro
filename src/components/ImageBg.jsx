@@ -1,4 +1,4 @@
-import { AspectRatio, Box, View } from "native-base";
+import { AspectRatio, Box, Text, View } from "native-base";
 import { useEffect, useState } from "react";
 import { Image } from "react-native";
 import { Api } from "../services/api";
@@ -18,7 +18,9 @@ export function ImageBg({ id }){
   
 
   return(
-    <AspectRatio  w="100%" maxW={300} maxH={200} ratio={16 / 12} >
+    <Box  w="100%" maxW={300} maxH={200} >
+      <View position="absolute" bg="black" w="full" h="full" zIndex={2} opacity="0.2" borderRadius={10}></View>
+      <AspectRatio  ratio={16 / 12} >
         <Image
           borderRadius={10}
           style={{
@@ -27,11 +29,9 @@ export function ImageBg({ id }){
           source={{
             uri: `data:image/png;base64,${image}`,
           }}
-        >
-          <View />
-        </Image>
-      
-    </AspectRatio>
+        />
+      </AspectRatio>
+    </Box>
 
   )
 }

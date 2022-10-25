@@ -53,18 +53,12 @@ export function Home() {
       </VStack>
 
       <VStack
-        py="-2"
         alignSelf="center"
         my="4"
-        space={5}
-        w="85%"
-        divider={
-          <Box px="2">
-            <Divider />
-          </Box>
-        }
+        w="full"
+        px={4}
       >
-        <VStack w="100%" space={5} alignSelf="center">
+        <VStack w="100%" alignSelf="center">
           <Input
             placeholder="Pesquisar"
             variant="filled"

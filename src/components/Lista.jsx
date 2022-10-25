@@ -1,19 +1,24 @@
-import { AspectRatio, Box, FlatList, Heading, HStack, Image, Stack } from "native-base"
+import { AspectRatio, Box, Button, FlatList, Heading, HStack, Image, Stack } from "native-base"
 import { useState } from "react";
+import { limitDescription } from "../utils/text";
 import { ImageBg } from "./ImageBg";
 
 
 export function Lista({ data }){
-
+  const [cont, setCont] = useState(0);
+  
   return (
     <FlatList  data={data} numColumns={2} renderItem={({
-      item
+      item, index
     }) =>
-      <Box flex={1} justifyContent="center" mx={4} alignItems="center"  my={4}>
+    <>
+      <Button variant="ghost" p={0} flex={1} justifyContent="center" mx={4} alignItems="center"  my={4}>
         <Box  maxHeight="200"  >
-          <ImageBg 
-            id={item.id}
-          />
+          <AspectRatio  w="100%" maxW={300} maxH={200} ratio={16 / 12} >
+            <ImageBg 
+              id={item.id}
+            />
+          </AspectRatio>
           <Heading
             width="full"
             height="full"
@@ -24,10 +29,31 @@ export function Lista({ data }){
             right={0}
             position="absolute"
           >
-            {item.nomeCientifico}
+            { limitDescription(item.nomeCientifico)}
           </Heading>
         </Box>
-      </Box> 
+      </Button> 
+      {(index == (data.length - 1) && index % 2 === 0) && (
+        <Box flex={1} justifyContent="center" mx={4} alignItems="center"  my={4}>
+          <Box  maxHeight="200"  >
+            <AspectRatio  w="100%" maxW={300} maxH={200} ratio={16 / 12} >
+              
+            </AspectRatio>
+            <Heading
+              width="full"
+              height="full"
+              color="white"
+              textAlign="center"
+              top={50}
+              bottom={0}
+              right={0}
+              position="absolute"
+            >
+            </Heading>
+          </Box>
+        </Box> 
+      )}
+    </>
     } keyExtractor={item => item.id} /> 
   )
 }
