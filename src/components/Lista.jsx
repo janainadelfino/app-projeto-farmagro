@@ -16,12 +16,7 @@ export function Lista({ data }){
     }) =>
     <>
       <Button variant="ghost" p={0} flex={1} justifyContent="center" mx={4} alignItems="center"  my={4} onPress={() => {
-        navigation.dispatch(
-          CommonActions.navigate({
-            name: 'Detalhe',
-            params: { id: item.id },
-          })
-        )
+        navigation.navigate('Detalhe', { id: item.id })
       }}>
         <Box  maxHeight="200"  >
           <AspectRatio  w="100%" maxW={300} maxH={200} ratio={16 / 12} >

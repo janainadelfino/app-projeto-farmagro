@@ -18,6 +18,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { Api } from "../services/api";
 import { useEffect, useState } from "react";
 import { Lista } from "../components/Lista";
+import { Header } from "../components/Header";
 
 export function Home() {
   const [planta, setPlanta] = useState([]);
@@ -37,19 +38,7 @@ export function Home() {
 
   return (
     <VStack flex={1} mb={10} bg="#FFFFFF">
-      <VStack>
-        <Center py="-2">
-          <Image
-            source={{
-              uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDV6XWKl0A-rWwoqzNNCH_VkUdojQ4jIU41w&usqp=CAU",
-            }}
-            size="md"
-            w="10%"
-            alt="Imagem da logo"
-          />
-          <Heading size={"xs"}>AgroTech</Heading>
-        </Center>
-      </VStack>
+      <Header />
 
       <VStack
         alignSelf="center"
