@@ -1,18 +1,7 @@
 import {
-  Box,
-  HStack,
   VStack,
-  Image,
-  Center,
-  Heading,
-  Divider,
   Input,
   Icon,
-  AspectRatio,
-  Stack,
-  ZStack,
-  ScrollView,
-  Container,
 } from "native-base";
 import { Ionicons } from "@expo/vector-icons";
 import { Api } from "../services/api";
@@ -37,9 +26,8 @@ export function Home() {
   }, []);
 
   return (
-    <VStack flex={1} mb={10} bg="#FFFFFF">
+    <VStack flex={1} bg="#FFFFFF">
       <Header />
-
       <VStack
         alignSelf="center"
         my="4"
