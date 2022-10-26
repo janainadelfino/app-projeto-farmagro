@@ -15,11 +15,11 @@ export function Lista({ data }){
       item, index
     }) =>
     <>
-      <Button variant="ghost" p={0} flex={1} justifyContent="center" mx={4} alignItems="center"  my={4} onPress={() => {
+      <Button key={index} variant="ghost" p={0} flex={1} justifyContent="center" mx={4} alignItems="center"  my={4} onPress={() => {
         navigation.navigate('Detalhe', { id: item.id })
       }}>
-        <Box  maxHeight="200"  >
-          <AspectRatio  w="100%" maxW={300} maxH={200} ratio={16 / 12} >
+        <Box w="full"  maxHeight="200"  >
+          <AspectRatio  w="100%"  ratio={16 / 12} >
             <ImageBg 
               id={item.id}
             />

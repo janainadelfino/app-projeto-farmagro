@@ -20,7 +20,7 @@ export function ImageBg({ id }){
   return(
     <Box  w="100%" maxW={300} maxH={200} >
       <View position="absolute" bg="black" w="full" h="full" zIndex={2} opacity="0.2" borderRadius={10}></View>
-      <AspectRatio  ratio={16 / 12} >
+      <AspectRatio ratio={16 / 12} >
         <Image
           borderRadius={10}
           style={{
