@@ -9,13 +9,14 @@ import {
   useTheme,
   Stack,
 } from "native-base";
-import { AspectRatio, Box, Button, FlatList, Heading, HStack, Image, Stack } from "native-base"
+
 import { useEffect, useState } from "react";
 import { limitDescription } from "../utils/text";
 import { ImageBg } from "./ImageBg";
 import { useNavigation, CommonActions } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import { RotationGestureHandler } from "react-native-gesture-handler";
 
 export function Lista({ data }) {
   const [cont, setCont] = useState(0);
@@ -41,12 +42,69 @@ export function Lista({ data }) {
   //     console.log(error);
   //   }
   // }
-  // const ifExists = (planta) => {
-  //   if (favoritesArray.filter((item) => item.id === planta.id).length > 0) {
-  //     return true;
-  //   }
-  //   return false;
+
+  // async function isFavorite() {
+  //   AsyncStorage.getItem("@plantmanager:favorites")
+  //     .then((planta) => {
+  //       if (planta) {
+  //         return true;
+  //       }
+  //       return false;
+  //     });
+  // }
+  // let STORAGE_KEY = '@plantas';
+  // const plantas = JSON.stringify(data);
+  // //buscar os filmes salvos
+  // const getPlantsSaves = async () => {
+
+  //   const myPlants = await AsyncStorage.getItem(STORAGE_KEY);
+
+  //   let plantSave = JSON.parse(myPlants) || [];
+
+  //   return plantSave;
   // };
+
+  // //salvar um novo filme
+  // const savePlant = async (plantas) => {
+  //   let plantStore = await getPlantsSaves(STORAGE_KEY);
+
+  //   //se tiver um filme salvo com esse mesmo ID ou  com  Id duplicado  precisamos ignorar
+    
+  //   plantStore.push(plantas);
+
+  //   await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(plantStore));
+  //   console.log("filme salvo com sucesso");
+  // };
+
+  // //deletar algum filme espec[ifico
+
+  // const deletePlant = async (id) => {
+  //   let plantsSaved = await getPlantsSaves("@favoritesave");
+  //   const hasPlant = plantStore.some((item) => item.id === plantas.id);
+
+  //   if (hasPlant) {
+  //     deletePlant
+  //   }
+
+  //   const myPlants = plantsSaved.filter((item) => item.id !== id);
+
+  //   await AsyncStorage.setItem("@favoritesave", JSON.stringify(myPlants));
+  //   console.log(`Filme deletado`);
+
+  //   return myPlants;
+  // };
+
+  // //filtrar se algum item ja esta salvo na lista
+
+  // const hasPlant = async (plantas) => {
+  //   const plantsStored = await getPlantsSaves("@favoritesave");
+
+  //   const hasPlants = plantsStored.some((item) => item.id === plantas.id);
+
+  //   return hasPlants ? true : false;
+  // };
+
+
   return (
     <FlatList
       data={data}
@@ -73,9 +131,9 @@ export function Lista({ data }) {
                 bgColor="transparent"
                 position="absolute"
                 right="1px"
-                onPress={handleFavorite}>
+                onPress={() => hasPlant(item.id) ? savePlant(item.id) : deletePlant(item.id)}>
                 <MaterialCommunityIcons
-                  name="heart"
+                  name={hasPlant(item.id) ? 'cards-heart' : 'cards-heart-outline'}
                   color={colors.red["700"]}
                   size={28}
                 />
