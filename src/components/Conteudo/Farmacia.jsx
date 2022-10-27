@@ -15,15 +15,15 @@ export function Farmacia({ dados }) {
       animate={{
         opacity: 1,
         transition: {
-          duration: 250,
+          duration: 400,
         },
       }}
     >
       <VStack bg="gray.150" borderRadius={4} space={4} px={4} py={4}>
         {Object.entries(dados).map(([key, value]) => (
-          <>
+          <View key={key}>
             {Array.isArray(value) ? (
-              <VStack key={key} space={4}>
+              <VStack space={4}>
                 {value.map((item, index) => (
                   <View key={index}>
                     <Heading>{renameHeadingFarmacia(key)}</Heading>
@@ -32,12 +32,12 @@ export function Farmacia({ dados }) {
                 ))}
               </VStack>
             ) : (
-              <VStack key={key}>
+              <VStack>
                 <Heading key={key}>{renameHeadingFarmacia(key)}</Heading>
                 {value ? <Text>{value}</Text> : <Text>Não há informações</Text>}
               </VStack>
             )}
-          </>
+          </View>
         ))}
       </VStack>
     </PresenceTransition>

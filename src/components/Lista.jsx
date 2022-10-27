@@ -1,5 +1,5 @@
 import { AspectRatio, Box, Button, FlatList, Heading, HStack, Image, Stack } from "native-base"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { limitDescription } from "../utils/text";
 import { ImageBg } from "./ImageBg";
 import { useNavigation, CommonActions  } from '@react-navigation/native'
@@ -7,8 +7,8 @@ import { useNavigation, CommonActions  } from '@react-navigation/native'
 
 export function Lista({ data }){
   const [cont, setCont] = useState(0);
-  
   const navigation = useNavigation();
+ 
 
   return (
     <FlatList  data={data} numColumns={2} renderItem={({
@@ -33,8 +33,8 @@ export function Lista({ data }){
             bottom={0}
             right={0}
             position="absolute"
-          >
-            { limitDescription(item.nomeCientifico)}
+          > 
+            { limitDescription(item.nome[item.nome.length-1]) }
           </Heading>
         </Box>
       </Button> 

@@ -19,8 +19,6 @@ export function Home() {
       .catch((error) => alert(error));
   }
 
-  
-
   useEffect(() => {
     fetchDados();
   }, []);
