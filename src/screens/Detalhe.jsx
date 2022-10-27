@@ -42,8 +42,8 @@ export function Detalhe({ route }) {
   }
 
   useEffect(() => {
-    fetchDadosImage();
     fetchDados();
+    fetchDadosImage();
   }, []);
 
   if(!loading) {
@@ -52,13 +52,6 @@ export function Detalhe({ route }) {
     )
   }
 
-  function renderImage({ item }){
-    return (
-      <View>
-        <Text>aa</Text>
-      </View>
-    )
-  }
   const width = Dimensions.get('window').width;
 
   return (
@@ -72,14 +65,14 @@ export function Detalhe({ route }) {
             autoPlay={true}
             data={[...new Array(plantaImg.length).keys()]}
             scrollAnimationDuration={2000}
-            onSnapToItem={(index) => console.log('current index:', index)}
+            onSnapToItem={(index) => <></>}
             renderItem={({ index }) => (
                 <View
                   key={index}
-                    style={{
-                        flex: 1,
-                        justifyContent: 'center',
-                    }}
+                  style={{
+                      flex: 1,
+                      justifyContent: 'center',
+                  }}
                 > 
                 <AspectRatio  ratio={16 / 12} >
                   <Image
@@ -99,7 +92,7 @@ export function Detalhe({ route }) {
             )}
         />
         <VStack mx={4} space={6}>
-          <Heading mt={4} textAlign="center">{planta.nomeCientifico}</Heading>
+          <Heading mt={4} textAlign="center">{planta.nome[planta.nome.length-1]}</Heading>
           <HStack justifyContent="space-evenly" alignItems="center">
             <Button
               minW={120}
@@ -108,7 +101,7 @@ export function Detalhe({ route }) {
               rounded="lg"
               onPress={() => setChoose("agro")}
             >
-              <Text fontSize="md">Agricultura</Text>
+              <Text fontSize="md">Cultivo</Text>
             </Button>
             <Button
               minW={120}
@@ -117,7 +110,7 @@ export function Detalhe({ route }) {
               rounded="lg"
               onPress={() => setChoose("farma")}
             >
-              <Text fontSize="md">Farmácia</Text>
+              <Text fontSize="md">Consumo</Text>
             </Button>
           </HStack>
           {choose === "agro" ? (

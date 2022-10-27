@@ -1,4 +1,4 @@
-import { Heading, Text, VStack, PresenceTransition } from "native-base";
+import { Heading, Text, VStack, PresenceTransition, View } from "native-base";
 import { useEffect, useState } from "react";
 import { renameHeadingAgronomia } from "../../utils/text";
 
@@ -23,20 +23,20 @@ export function Agronomia({ dados }) {
     }} animate={{
       opacity: 1,
       transition: {
-        duration: 250
+        duration: 400
       }
     }}>
     <VStack bg="gray.150" borderRadius={4} space={4} px={4} py={4}>
       {
         Object.entries(dados).map(([key, value]) => (
-          <>
-            <Heading key={key} >{renameHeadingAgronomia(key)}</Heading>
+          <View key={key}>
+            <Heading  >{renameHeadingAgronomia(key)}</Heading>
             { value ? (
               <Text>{value}</Text>
             ): (
               <Text>Não há informações</Text>
             ) }
-          </>
+          </View>
         ))
       }
     </VStack>

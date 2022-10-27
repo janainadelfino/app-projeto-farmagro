@@ -9,6 +9,7 @@ import {
   useTheme,
   Stack,
 } from "native-base";
+import { AspectRatio, Box, Button, FlatList, Heading, HStack, Image, Stack } from "native-base"
 import { useEffect, useState } from "react";
 import { limitDescription } from "../utils/text";
 import { ImageBg } from "./ImageBg";
