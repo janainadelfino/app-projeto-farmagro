@@ -15,7 +15,6 @@ export function ImageBg({ id }){
   useEffect(() => {
     fetchImage();
   }, []);
-  
 
   return(
     <Box  w="100%" maxW={300} maxH={200} >

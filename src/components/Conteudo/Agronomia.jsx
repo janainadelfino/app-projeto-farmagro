@@ -27,18 +27,18 @@ export function Agronomia({ dados }) {
       }
     }}>
     <VStack bg="gray.150" borderRadius={4} space={4} px={4} py={4}>
-      {
-        Object.entries(dados).map(([key, value]) => (
-          <View key={key}>
-            <Heading  >{renameHeadingAgronomia(key)}</Heading>
-            { value ? (
-              <Text>{value}</Text>
-            ): (
-              <Text>Não há informações</Text>
-            ) }
-          </View>
-        ))
-      }
+      <Heading mt={2}>Tratos Culturais</Heading>
+      {dados.tratosCulturais ? <Text>{dados.tratosCulturais}</Text> : <Text>Não há informações</Text>}
+      <Heading mt={2}>Cultivo</Heading>
+      {dados.cultivo ? <Text>{dados.cultivo}</Text> : <Text>Não há informações</Text>}
+      <Heading mt={2}>Material e Métodos</Heading>
+      {dados.materialMetodos ? <Text>{dados.materialMetodos}</Text> : <Text>Não há informações</Text>}
+      <Heading mt={2}>Adubação</Heading>
+      {dados.adubacao ? <Text>{dados.adubacao}</Text> : <Text>Não há informações</Text>}
+      <Heading mt={2}>Manejo das Prinpais Pragas</Heading>
+      {dados.praga ? <Text>{dados.praga}</Text> : <Text>Não há informações</Text>}
+      <Heading mt={2}>Irrigação</Heading>
+      {dados.irrigacao ? <Text>{dados.irrigacao}</Text> : <Text>Não há informações</Text>}
     </VStack>
     </PresenceTransition>
   );

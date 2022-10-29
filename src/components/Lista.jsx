@@ -9,7 +9,6 @@ export function Lista({ data }){
   const [cont, setCont] = useState(0);
   const navigation = useNavigation();
  
-
   return (
     <FlatList  data={data} numColumns={2} renderItem={({
       item, index
