@@ -39,7 +39,7 @@ export function Lista({ data, isFavoriteList }) {
 
   let STORAGE_KEY = '@plantas';
   // //buscar os filmes salvos
-  const getPlantsSaves = async () => {
+  const getPlantsSaves = async() => {
     const myPlants = await AsyncStorage.getItem(STORAGE_KEY);
     //console.log(myPlants)
 
