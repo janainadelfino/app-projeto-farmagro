@@ -1,6 +1,8 @@
 import { extendTheme } from 'native-base';
 
-export const THEME = extendTheme({
+export function AccessibilityTheme(value ) {
+  const multiplier = value[0].theme
+  return extendTheme({
   colors: {
     green: {
       300: '#00B37E',
@@ -36,12 +38,12 @@ export const THEME = extendTheme({
     // body: 'Roboto_400Regular',
   },
   fontSizes: {
-    xs: 12,
-    sm: 14,
-    md: 16,
-    lg: 20,
+    xs: 12 * multiplier,
+    sm: 14 * multiplier,
+    md: 16 * multiplier,
+    lg: 20 * multiplier,
   },
   sizes: {
     14: 56
   }
-});
+})};

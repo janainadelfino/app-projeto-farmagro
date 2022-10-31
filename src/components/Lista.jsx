@@ -18,97 +18,95 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { RotationGestureHandler } from "react-native-gesture-handler";
 
-export function Lista({ data }) {
+export function Lista({ data, isFavoriteList }) {
   const [cont, setCont] = useState(0);
-
+  const [favoritos, setFavoritos] = useState([]);
   const navigation = useNavigation();
 
   const { colors } = useTheme();
-  // async function handleFavorite() {
-  //   try {
-  //     const planta = await AsyncStorage.getItem("@plantmanager:favorites");
-  //     if (planta) {
-  //       const favoritesArray = JSON.parse(planta);
-  //       const newFavoritesArray = favoritesArray.filter(
-  //         (planta) => planta.id !== item.id
-  //       );
 
-  //       await AsyncStorage.setItem(
-  //         "@plantmanager:favorites",
-  //         JSON.stringify(newFavoritesArray)
-  //       );
-  //     }
-  //     console.log("Planta adicionada dos favoritos");
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }
+  useEffect(() => {
+    const focusHandler = navigation.addListener('focus', () => {
+      getPlantsSaves();
+    });
+    return focusHandler;
+  }, [navigation]);
 
-  // async function isFavorite() {
-  //   AsyncStorage.getItem("@plantmanager:favorites")
-  //     .then((planta) => {
-  //       if (planta) {
-  //         return true;
-  //       }
-  //       return false;
-  //     });
-  // }
-  // let STORAGE_KEY = '@plantas';
-  // const plantas = JSON.stringify(data);
+  useEffect((
+  ) => {
+    getPlantsSaves();
+  }, []);
+
+
+  let STORAGE_KEY = '@plantas';
   // //buscar os filmes salvos
-  // const getPlantsSaves = async () => {
+  const getPlantsSaves = async() => {
+    const myPlants = await AsyncStorage.getItem(STORAGE_KEY);
+    //console.log(myPlants)
 
-  //   const myPlants = await AsyncStorage.getItem(STORAGE_KEY);
-
-  //   let plantSave = JSON.parse(myPlants) || [];
-
-  //   return plantSave;
-  // };
+    setFavoritos(JSON.parse(myPlants) || []);
+    return myPlants;
+  };
 
   // //salvar um novo filme
-  // const savePlant = async (plantas) => {
-  //   let plantStore = await getPlantsSaves(STORAGE_KEY);
+  const savePlant = async (plantas) => {
+    var plantStore = [];
+    console.log(plantas)
+    if (favoritos) {
+      for (let i = 0; i < favoritos.length ?? 0; i++) {
+        if (Number.isInteger(favoritos[i])) {
+          plantStore.push(favoritos[i]);
 
-  //   //se tiver um filme salvo com esse mesmo ID ou  com  Id duplicado  precisamos ignorar
-    
-  //   plantStore.push(plantas);
-
-  //   await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(plantStore));
-  //   console.log("filme salvo com sucesso");
-  // };
+        }
+      }
+    }
+    plantStore.push(plantas)
+    setFavoritos(plantStore);
+    await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(plantStore));
+  };
 
   // //deletar algum filme espec[ifico
 
-  // const deletePlant = async (id) => {
-  //   let plantsSaved = await getPlantsSaves("@favoritesave");
-  //   const hasPlant = plantStore.some((item) => item.id === plantas.id);
+  const deletePlant = async (id) => {
+    //console.log(id)
+    var lista = favoritos.slice(0);
+    for (let i = 0; i < favoritos.length ?? 0; i++) {
+      if (favoritos[i] == id) {
+        lista.splice(i, 1);
+        setFavoritos(lista);
+      }
+    }
 
-  //   if (hasPlant) {
-  //     deletePlant
-  //   }
+    await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(lista));
+  };
 
-  //   const myPlants = plantsSaved.filter((item) => item.id !== id);
 
-  //   await AsyncStorage.setItem("@favoritesave", JSON.stringify(myPlants));
-  //   console.log(`Filme deletado`);
-
-  //   return myPlants;
-  // };
 
   // //filtrar se algum item ja esta salvo na lista
 
-  // const hasPlant = async (plantas) => {
-  //   const plantsStored = await getPlantsSaves("@favoritesave");
+  const hasPlant = (id) => {
+    var data = favoritos;
+    for (let i = 0; i < data.length; i++) {
+      if (data[i] == id) {
+        return true;
+      }
+    }
+    return false;
+  };
 
-  //   const hasPlants = plantsStored.some((item) => item.id === plantas.id);
-
-  //   return hasPlants ? true : false;
-  // };
-
+  const getFavoritos = () => {
+    pfavoritas = [];
+    for (let i = 0; i < data.length; i++) {
+      if (hasPlant(data[i].id)) {
+        pfavoritas.push(data[i]);
+      }
+    }
+    return pfavoritas;
+  }
 
   return (
     <FlatList
-      data={data}
+      data={isFavoriteList ? getFavoritos() : data}
       numColumns={2}
       renderItem={({ item, index }) => (
         <>
@@ -128,17 +126,17 @@ export function Lista({ data }) {
               <AspectRatio w="100%" ratio={16 / 12}>
                 <ImageBg id={item.id}></ImageBg>
               </AspectRatio>
-              {/* <Button
+              {<Button
                 bgColor="transparent"
                 position="absolute"
                 right="1px"
-                onPress={() => hasPlant(item.id) ? savePlant(item.id) : deletePlant(item.id)}>
+                onPress={() => hasPlant(item.id) ? deletePlant(item.id) : savePlant(item.id)}>
                 <MaterialCommunityIcons
                   name={hasPlant(item.id) ? 'cards-heart' : 'cards-heart-outline'}
                   color={colors.red["700"]}
                   size={28}
                 />
-              </Button> */}
+              </Button>}
               <Heading
                 width="full"
                 height="full"

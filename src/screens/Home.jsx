@@ -8,7 +8,6 @@ import { Api } from "../services/api";
 import { useEffect, useState } from "react";
 import { Lista } from "../components/Lista";
 import { Header } from "../components/Header";
-
 export function Home() {
   const [planta, setPlanta] = useState([]);
   const [idimage, setImage] = useState([]);
@@ -22,7 +21,7 @@ export function Home() {
   useEffect(() => {
     fetchDados();
   }, []);
-
+ 
   return (
     <VStack flex={1} bg="#FFFFFF">
       <Header />

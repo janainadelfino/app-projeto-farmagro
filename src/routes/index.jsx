@@ -1,6 +1,7 @@
 import { createDrawerNavigator } from "@react-navigation/drawer";
-import { Button, useTheme, View } from "native-base";
+import { Button, IconButton, useTheme, View } from "native-base";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import { Favoritos } from "../screens/Favoritos";
 import { StackRoutes } from "./StackRoutes";
 
 const Drawer = createDrawerNavigator();
@@ -9,6 +10,7 @@ export function Routes() {
   const { colors } = useTheme();
 
   return (
+    <>
     <Drawer.Navigator
       screenOptions={{
         headerShown: false,
@@ -28,6 +30,18 @@ export function Routes() {
           ),
         }}
       />
+       <Drawer.Screen
+        name="Favoritos"
+        component={Favoritos}
+        options={{
+          drawerIcon: ({ focused, size, color }) => (
+            <MaterialCommunityIcons name="star" size={size} color={color} />
+          ),
+        }}
+      />
+      
     </Drawer.Navigator>
+    
+    </>
   );
 }
