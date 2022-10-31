@@ -1,12 +1,15 @@
 import { Heading, Text, VStack, PresenceTransition, View } from "native-base";
 import { useEffect, useState } from "react";
 import { renameHeadingAgronomia } from "../../utils/text";
+import { PlayerVideo } from "../Video";
 
 export function Agronomia({ dados }) {
+  const agroDados = dados.agroDados;
+
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    if(dados) {
+    if(agroDados) {
       setLoading(true)
     }
   },[])
@@ -28,17 +31,25 @@ export function Agronomia({ dados }) {
     }}>
     <VStack bg="gray.150" borderRadius={4} space={4} px={4} py={4}>
       <Heading mt={2}>Tratos Culturais</Heading>
-      {dados.tratosCulturais ? <Text>{dados.tratosCulturais}</Text> : <Text>Não há informações</Text>}
+      {agroDados.tratosCulturais ? <Text>{agroDados.tratosCulturais}</Text> : <Text>Não há informações</Text>}
       <Heading mt={2}>Cultivo</Heading>
-      {dados.cultivo ? <Text>{dados.cultivo}</Text> : <Text>Não há informações</Text>}
+      {agroDados.cultivo ? <Text>{agroDados.cultivo}</Text> : <Text>Não há informações</Text>}
       <Heading mt={2}>Material e Métodos</Heading>
-      {dados.materialMetodos ? <Text>{dados.materialMetodos}</Text> : <Text>Não há informações</Text>}
+      {agroDados.materialMetodos ? <Text>{agroDados.materialMetodos}</Text> : <Text>Não há informações</Text>}
       <Heading mt={2}>Adubação</Heading>
-      {dados.adubacao ? <Text>{dados.adubacao}</Text> : <Text>Não há informações</Text>}
+      {agroDados.adubacao ? <Text>{agroDados.adubacao}</Text> : <Text>Não há informações</Text>}
       <Heading mt={2}>Manejo das Prinpais Pragas</Heading>
-      {dados.praga ? <Text>{dados.praga}</Text> : <Text>Não há informações</Text>}
+      {agroDados.praga ? <Text>{agroDados.praga}</Text> : <Text>Não há informações</Text>}
       <Heading mt={2}>Irrigação</Heading>
-      {dados.irrigacao ? <Text>{dados.irrigacao}</Text> : <Text>Não há informações</Text>}
+      {agroDados.irrigacao ? <Text>{agroDados.irrigacao}</Text> : <Text>Não há informações</Text>}
+      <View borderBottomWidth={1} borderBottomColor="gray.300"></View>
+        <VStack mt={2}>
+          <Heading>Vídeos</Heading>
+          <PlayerVideo 
+            dados={dados.videos}
+            tipo="agronomia"
+          />
+        </VStack>
     </VStack>
     </PresenceTransition>
   );

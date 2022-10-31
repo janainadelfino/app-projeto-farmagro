@@ -9,7 +9,7 @@ import {
 } from "accordion-collapse-react-native";
 
 export function PlayerVideo({ dados, tipo }) {
-  const tipoDado = tipo === 'farmacia' ? false : true;
+  const tipoDado = tipo === 'farmacia' ? true : false;
   const videoDados = dados.filter((item) => item.curso !== tipoDado);
 
   const [playing, setPlaying] = useState(false);
@@ -20,8 +20,6 @@ export function PlayerVideo({ dados, tipo }) {
       Alert.alert("video has finished playing!");
     }
   }, []);
-
-  
 
   return (
     <View mt={4}>

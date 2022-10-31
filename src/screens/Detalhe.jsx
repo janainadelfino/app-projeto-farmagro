@@ -132,7 +132,7 @@ export function Detalhe({ route }) {
           {choose === "farma" ? (
             <Farmacia dados={planta} />
             ) : (
-            <Agronomia dados={planta.agroDados} />
+            <Agronomia dados={planta} />
           )}
           
         </VStack>
