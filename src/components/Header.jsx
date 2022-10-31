@@ -24,19 +24,19 @@ export function Header({ voltar }) {
   const navigation = useNavigation();
   const safeAreaProps = useSafeArea({
     safeAreaTop: true,
-    pt: 2
+    pt: 2,
   });
   const STORAGE_KEY = "@tema";
   const getPreference = async () => {
     const preference = await AsyncStorage.getItem(STORAGE_KEY);
-    console.log(JSON.parse(preference))
+    console.log(JSON.parse(preference));
   };
   const setPreference = (value) => {
     dispatch({
-      type: 'changeTheme',
-      newTheme: value
-    })
-  }
+      type: "changeTheme",
+      newTheme: value,
+    });
+  };
   const savePreference = async (value) => {
     await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(value));
   };
@@ -47,10 +47,15 @@ export function Header({ voltar }) {
       alignItems="center"
       {...safeAreaProps}
     >
-      <HStack w="full" justifyContent="space-between" alignItems="center">
+      <HStack
+        w="full"
+        justifyContent="space-between"
+        alignItems="center"
+      >
         {voltar ? (
           <Button
             ml="5"
+            mr={12}
             variant="ghost"
             _pressed={{ bg: "green.200" }}
             onPress={() => navigation.goBack()}
@@ -63,7 +68,8 @@ export function Header({ voltar }) {
           </Button>
         ) : (
           <Button
-            ml="5"
+            ml="2"
+            mr={16}
             variant="ghost"
             _pressed={{ bg: "green.200" }}
             onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}
@@ -75,45 +81,47 @@ export function Header({ voltar }) {
             />
           </Button>
         )}
-        <Center h="20" w="10">
-          <Image resizeMode="contain" source={logo} alt="image" />
+        <Center h="20" w="40%">
+          <Image w={10} resizeMode="contain" source={logo} alt="image" />
         </Center>
-        <View w={75} />
-        <Button
-          backgroundColor={"transparent"}
-          onPress={() => {
-            var ntheme = theme + 1;
-            savePreference(ntheme);
-            dispatch({
-              type: 'changeTheme',
-              newTheme: (theme > 3 ? 4 : ntheme)
-            })
-          }}
-        >
-          <MaterialCommunityIcons
-            name="format-font-size-increase"
-            color={colors.green["700"]}
-            size={28}
-          />
-        </Button>
-        <Button
-
-          backgroundColor={"transparent"}
-          onPress={() => {
-            var ntheme = theme - 1;
-            savePreference(ntheme);
-            dispatch({
-              type: 'changeTheme',
-              newTheme: (theme < 2 ? 1 : ntheme)
-            })
-          }}
-        >
-          <MaterialCommunityIcons
-            name="format-font-size-decrease"
-            color={colors.green["700"]}
-            size={28}
-          />
-        </Button>
+        <HStack space={2} pr={4}>
+          <Button
+            variant="ghost"
+            _pressed={{ bg: "green.200" }}
+            onPress={() => {
+              var ntheme = theme + 1;
+              savePreference(ntheme);
+              dispatch({
+                type: "changeTheme",
+                newTheme: theme > 3 ? 4 : ntheme,
+              });
+            }}
+          >
+            <MaterialCommunityIcons
+              name="format-font-size-increase"
+              color={colors.green["700"]}
+              size={28}
+            />
+          </Button>
+          <Button
+            variant="ghost"
+            _pressed={{ bg: "green.200" }}
+            onPress={() => {
+              var ntheme = theme - 1;
+              savePreference(ntheme);
+              dispatch({
+                type: "changeTheme",
+                newTheme: theme < 2 ? 1 : ntheme,
+              });
+            }}
+          >
+            <MaterialCommunityIcons
+              name="format-font-size-decrease"
+              color={colors.green["700"]}
+              size={28}
+            />
+          </Button>
+        </HStack>
       </HStack>
     </VStack>
   );

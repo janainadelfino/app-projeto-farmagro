@@ -101,8 +101,10 @@ export function Lista({ data, isFavoriteList }) {
         pfavoritas.push(data[i]);
       }
     }
+    
     return pfavoritas;
   }
+
 
   return (
     <FlatList
@@ -150,31 +152,58 @@ export function Lista({ data, isFavoriteList }) {
               </Heading>
             </Box>
           </Button>
-          {index == data.length - 1 && index % 2 === 0 && (
-            <Box
-              flex={1}
-              justifyContent="center"
-              mx={4}
-              alignItems="center"
-              my={4}>
-              <Box maxHeight="200">
-                <AspectRatio
-                  w="100%"
-                  maxW={300}
-                  maxH={200}
-                  ratio={16 / 12}></AspectRatio>
-                <Heading
-                  width="full"
-                  height="full"
-                  color="white"
-                  textAlign="center"
-                  top={50}
-                  bottom={0}
-                  right={0}
-                  position="absolute"></Heading>
-              </Box>
-            </Box>
-          )}
+          {!isFavoriteList ? (
+              index == data.length - 1 && index % 2 === 0) && (
+                <Box
+                flex={1}
+                justifyContent="center"
+                mx={4}
+                alignItems="center"
+                my={4}>
+                  <Box maxHeight="200">
+                    <AspectRatio
+                      w="100%"
+                      maxW={300}
+                      maxH={200}
+                      ratio={16 / 12}></AspectRatio>
+                    <Heading
+                      width="full"
+                      height="full"
+                      color="white"
+                      textAlign="center"
+                      top={50}
+                      bottom={0}
+                      right={0}
+                      position="absolute"></Heading>
+                  </Box>
+                </Box>
+              ) : (
+                pfavoritas.length % 2 === 1 && (
+                  <Box
+                  flex={1}
+                  justifyContent="center"
+                  mx={4}
+                  alignItems="center"
+                  my={4}>
+                    <Box maxHeight="200">
+                      <AspectRatio
+                        w="100%"
+                        maxW={300}
+                        maxH={200}
+                        ratio={16 / 12}></AspectRatio>
+                      <Heading
+                        width="full"
+                        height="full"
+                        color="white"
+                        textAlign="center"
+                        top={50}
+                        bottom={0}
+                        right={0}
+                        position="absolute"></Heading>
+                    </Box>
+                  </Box>
+                )
+              )}
         </>
       )}
       keyExtractor={(item) => item.id}
