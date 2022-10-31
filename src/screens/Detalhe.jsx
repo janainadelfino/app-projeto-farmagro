@@ -21,7 +21,7 @@ import { Dimensions, Image } from 'react-native';
 export function Detalhe({ route }) {
   const [planta, setPlanta] = useState([]);
   const [plantaImg, setPlantaImg] = useState([]);
-  const [choose, setChoose] = useState();
+  const [choose, setChoose] = useState("farma");
   const [loading, setLoading] = useState(false);
 
   async function fetchDadosImage() {
@@ -93,31 +93,48 @@ export function Detalhe({ route }) {
         />
         <VStack mx={4} space={6}>
           <Heading mt={4} textAlign="center">{planta.nome[planta.nome.length-1]}</Heading>
-          <HStack justifyContent="space-evenly" alignItems="center">
+          <VStack space={2} p={2} bg="gray.150" borderRadius={4}>
+            <HStack space={2} flexWrap="wrap">
+              <Text fontSize="sm" textAlign="center" bold>Nome Científico: </Text>
+              <Text fontSize="sm" textAlign="center">{planta.nomeCientifico}</Text>
+            </HStack>
+            <HStack space={2} flexWrap="wrap">
+              <Text fontSize="sm" textAlign="center" bold>{planta.nome.length > 1 ? "Nomes Populares: " : "Nome Popular: "}</Text>
+              { planta.nome.map((item, index) => (
+                <Text fontSize="sm" textAlign="center">{item}{index < (planta.nome.length-1) ? "," : "."}</Text>
+              )) }
+            </HStack>
+          </VStack> 
+          <HStack justifyContent="space-between" alignItems="center" space={4}>
             <Button
+              _pressed={{ bg: "green.300" }}
+              opacity={choose === "agro" ? 1 : 0.5}
               minW={120}
               bg="green.400"
-              size="lg"
-              rounded="lg"
-              onPress={() => setChoose("agro")}
-            >
-              <Text fontSize="md">Cultivo</Text>
-            </Button>
-            <Button
-              minW={120}
-              bg="green.400"
-              size="lg"
+              w="48%"
               rounded="lg"
               onPress={() => setChoose("farma")}
             >
-              <Text fontSize="md">Consumo</Text>
+              <Text fontSize="md" color="white">Consumo</Text>
+            </Button>
+            <Button
+              _pressed={{ bg: "green.300"}}
+              opacity={choose === "farma" ? 1 : 0.5}
+              minW={120}
+              w="48%"
+              bg="green.400"
+              rounded="lg"
+              onPress={() => setChoose("agro")}
+            >
+              <Text fontSize="md" color="white">Cultivo</Text>
             </Button>
           </HStack>
-          {choose === "agro" ? (
-           <Agronomia dados={planta.agroDados} />
-          ) : (
-            <Farmacia dados={planta.farmaciaDados} />
+          {choose === "farma" ? (
+            <Farmacia dados={planta} />
+            ) : (
+            <Agronomia dados={planta} />
           )}
+          
         </VStack>
       </ScrollView>
     </VStack>

@@ -22,6 +22,7 @@ export function Lista({ data }) {
   const [cont, setCont] = useState(0);
 
   const navigation = useNavigation();
+
   const { colors } = useTheme();
   // async function handleFavorite() {
   //   try {
