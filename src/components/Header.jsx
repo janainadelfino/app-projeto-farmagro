@@ -55,7 +55,7 @@ export function Header({ voltar }) {
         {voltar ? (
           <Button
             ml="5"
-            mr={12}
+            mr={0}
             variant="ghost"
             _pressed={{ bg: "green.200" }}
             onPress={() => navigation.goBack()}
@@ -69,7 +69,7 @@ export function Header({ voltar }) {
         ) : (
           <Button
             ml="2"
-            mr={16}
+            mr={0}
             variant="ghost"
             _pressed={{ bg: "green.200" }}
             onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}
@@ -81,46 +81,37 @@ export function Header({ voltar }) {
             />
           </Button>
         )}
-        <Center h="20" w="40%">
+        <Center h="20" w="20%">
           <Image w={10} resizeMode="contain" source={logo} alt="image" />
         </Center>
         <HStack space={2} pr={4}>
           <Button
-            variant="ghost"
-            _pressed={{ bg: "green.200" }}
-            onPress={() => {
-              var ntheme = theme + 1;
-              savePreference(ntheme);
-              dispatch({
-                type: "changeTheme",
-                newTheme: theme > 3 ? 4 : ntheme,
-              });
-            }}
-          >
-            <MaterialCommunityIcons
+            leftIcon={<MaterialCommunityIcons
               name="format-font-size-increase"
               color={colors.green["700"]}
               size={28}
-            />
-          </Button>
-          <Button
-            variant="ghost"
+            />}
+              backgroundColor={(theme==1?"transparent":"green")}
+            variant={"ghost"}
             _pressed={{ bg: "green.200" }}
             onPress={() => {
-              var ntheme = theme - 1;
+              var ntheme = 1;
+              if (theme == 1) {
+                ntheme =2 ;
+              } else {
+                ntheme =1 ;
+              }
               savePreference(ntheme);
               dispatch({
                 type: "changeTheme",
-                newTheme: theme < 2 ? 1 : ntheme,
+                newTheme: ntheme,
               });
+
             }}
           >
-            <MaterialCommunityIcons
-              name="format-font-size-decrease"
-              color={colors.green["700"]}
-              size={28}
-            />
+
           </Button>
+
         </HStack>
       </HStack>
     </VStack>
