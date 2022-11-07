@@ -1,8 +1,13 @@
 {
   "expo": {
-    "name": "app-projeto-farmagro",
+    "name": "InfoPlantas",
     "slug": "app-projeto-farmagro",
-    "version": "1.0.0",
+    "icon":"./src/assets/logo.png",
+    "splash": {
+      "image": "./src/assets/logo.png",
+      "resizeMode": "contain"
+    },
+    "version": "1.1.1",
     "assetBundlePatterns": [
       "**/*"
     ],

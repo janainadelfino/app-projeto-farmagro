@@ -8,6 +8,7 @@ import {
   Image,
   useTheme,
   Stack,
+  theme,
 } from "native-base";
 
 import { useEffect, useState } from "react";
@@ -144,11 +145,12 @@ export function Lista({ data, isFavoriteList }) {
                 height="full"
                 color="white"
                 textAlign="center"
+                fontSize={"sm"}
                 top={50}
                 bottom={0}
                 right={0}
                 position="absolute">
-                {limitDescription(item.nomeCientifico)}
+                {limitDescription(item.nome[item.nome.length-1])}
               </Heading>
             </Box>
           </Button>

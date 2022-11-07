@@ -1,6 +1,6 @@
 export function limitDescription(description) {
-    if(description.length > 10) {
-      return description.substring(0, 7) + '...'
+    if(description.length > 20) {
+      return description.substring(0, 20) + '...'
     }else{
       return description
     }
