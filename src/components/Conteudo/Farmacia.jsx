@@ -9,13 +9,14 @@ import {
 import { useRef, useState } from "react";
 import { StyleSheet } from "react-native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import { Loading } from "../Loading";
 import { PlayerVideo } from "../Video";
 
 export function Farmacia({ dados }) {
   const farmaDados = dados.farmaciaDados;
 
   if (!farmaDados) {
-    return <Text>Carregando....</Text>;
+    return <Loading />;
   }
   const video = useRef(null);
   const [status, setStatus] = useState({});
@@ -76,7 +77,7 @@ export function Farmacia({ dados }) {
         <Heading mt={2}>Modo de Usar</Heading>
         {farmaDados.modoDeUsar.length > 0 ? (
           farmaDados.modoDeUsar.map((modo, index) => (
-            <HStack space={2} flexWrap="wrap">
+            <HStack key={index} space={2} flexWrap="wrap">
               <Text bold>{index + 1 + "º"}</Text>
               <Text>{modo}</Text>
             </HStack>

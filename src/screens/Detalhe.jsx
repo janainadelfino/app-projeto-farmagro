@@ -1,4 +1,4 @@
-import Carousel from 'react-native-reanimated-carousel';
+import Carousel from "react-native-reanimated-carousel";
 
 import {
   AspectRatio,
@@ -16,8 +16,8 @@ import { Agronomia } from "../components/Conteudo/Agronomia";
 import { Farmacia } from "../components/Conteudo/Farmacia";
 import { Header } from "../components/Header";
 import { Api } from "../services/api";
-import { Dimensions, Image } from 'react-native';
-import { Loading } from '../components/Loading';
+import { Dimensions, Image } from "react-native";
+import { Loading } from "../components/Loading";
 
 export function Detalhe({ route }) {
   const [planta, setPlanta] = useState([]);
@@ -28,8 +28,8 @@ export function Detalhe({ route }) {
   async function fetchDadosImage() {
     await Api.get(`imagem/plantaid/${route.params.id}`)
       .then((response) => {
-        setPlantaImg(response.data)
-        setLoading(true)
+        setPlantaImg(response.data);
+        setLoading(true);
       })
       .catch((error) => alert(error));
   }
@@ -37,7 +37,7 @@ export function Detalhe({ route }) {
   async function fetchDados() {
     await Api.get(`planta/id/${route.params.id}`)
       .then((response) => {
-        setPlanta(response.data)
+        setPlanta(response.data);
       })
       .catch((error) => alert(error));
   }
@@ -47,65 +47,75 @@ export function Detalhe({ route }) {
     fetchDadosImage();
   }, []);
 
-  if(!loading) {
-    return (
-      <Loading />
-    )
+  if (!loading) {
+    return <Loading />;
   }
 
-  const width = Dimensions.get('window').width;
+  const width = Dimensions.get("window").width;
 
   return (
     <VStack space={6} mb={10}>
       <Header voltar />
       <ScrollView mb="40" h="auto" w="full">
         <Carousel
-            loop
-            width={width}
-            height={width / 2}
-            autoPlay={true}
-            data={[...new Array(plantaImg.length).keys()]}
-            scrollAnimationDuration={2000}
-            onSnapToItem={(index) => <></>}
-            renderItem={({ index }) => (
-                <View
-                  key={index}
+          loop
+          width={width}
+          height={width / 2}
+          autoPlay={true}
+          data={[...new Array(plantaImg.length).keys()]}
+          scrollAnimationDuration={2000}
+          onSnapToItem={(index) => <></>}
+          renderItem={({ index }) => (
+            <View
+              style={{
+                flex: 1,
+                justifyContent: "center",
+              }}
+            >
+              <AspectRatio ratio={16 / 12}>
+                <Image
+                  borderRadius={10}
                   style={{
-                      flex: 1,
-                      justifyContent: 'center',
+                    resizeMode: "contain",
                   }}
-                > 
-                <AspectRatio  ratio={16 / 12} >
-                  <Image
-                    borderRadius={10}
-                    style={{
-                      resizeMode: 'contain',
-                    }}
-                    source={{
-                      uri: `data:image/png;base64,${plantaImg[index].dados}`,
-                    }}
-                  />
-                </AspectRatio>
-                    <Text style={{ textAlign: 'center', fontSize: 30 }}>
-                        {plantaImg[index].nome}
-                    </Text>
-                </View>
-            )}
+                  source={{
+                    uri: `data:image/png;base64,${plantaImg[index].dados}`,
+                  }}
+                />
+              </AspectRatio>
+              <Text style={{ textAlign: "center", fontSize: 30 }}>
+                {plantaImg[index].nome}
+              </Text>
+            </View>
+          )}
         />
         <VStack mx={4} space={6}>
-          <Heading mt={4} textAlign="center">{planta.nome[planta.nome.length-1]}</Heading>
+          <Heading mt={4} textAlign="center">
+            {planta.nome[planta.nome.length - 1]}
+          </Heading>
           <VStack space={2} p={2} bg="gray.150" borderRadius={4}>
             <HStack space={2} flexWrap="wrap">
-              <Text fontSize="sm" textAlign="center" bold>Nome Científico: </Text>
-              <Text fontSize="sm" textAlign="center">{planta.nomeCientifico}</Text>
+              <Text fontSize="sm" textAlign="center" bold>
+                Nome Científico:{" "}
+              </Text>
+              <Text fontSize="sm" textAlign="center">
+                {planta.nomeCientifico}
+              </Text>
             </HStack>
             <HStack space={2} flexWrap="wrap">
-              <Text fontSize="sm" textAlign="center" bold>{planta.nome.length > 1 ? "Nomes Populares: " : "Nome Popular: "}</Text>
-              { planta.nome.map((item, index) => (
-                <Text fontSize="sm" textAlign="center">{item}{index < (planta.nome.length-1) ? "," : "."}</Text>
-              )) }
+              <Text fontSize="sm" textAlign="center" bold>
+                {planta.nome.length > 1
+                  ? "Nomes Populares: "
+                  : "Nome Popular: "}
+              </Text>
+              {planta.nome.map((item, index) => (
+                <Text key={index} fontSize="sm" textAlign="center">
+                  {item}
+                  {index < planta.nome.length - 1 ? "," : "."}
+                </Text>
+              ))}
             </HStack>
-          </VStack> 
+          </VStack>
           <HStack justifyContent="space-between" alignItems="center" space={4}>
             <Button
               _pressed={{ bg: "green.300" }}
@@ -116,10 +126,12 @@ export function Detalhe({ route }) {
               rounded="lg"
               onPress={() => setChoose("farma")}
             >
-              <Text fontSize="md" color="white">Consumo</Text>
+              <Text fontSize="md" color="white">
+                Consumo
+              </Text>
             </Button>
             <Button
-              _pressed={{ bg: "green.300"}}
+              _pressed={{ bg: "green.300" }}
               opacity={choose === "farma" ? 1 : 0.5}
               minW={120}
               w="48%"
@@ -127,15 +139,16 @@ export function Detalhe({ route }) {
               rounded="lg"
               onPress={() => setChoose("agro")}
             >
-              <Text fontSize="md" color="white">Cultivo</Text>
+              <Text fontSize="md" color="white">
+                Cultivo
+              </Text>
             </Button>
           </HStack>
           {choose === "farma" ? (
             <Farmacia dados={planta} />
-            ) : (
+          ) : (
             <Agronomia dados={planta} />
           )}
-          
         </VStack>
       </ScrollView>
     </VStack>
