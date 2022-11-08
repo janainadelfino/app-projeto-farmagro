@@ -17,6 +17,7 @@ import { Farmacia } from "../components/Conteudo/Farmacia";
 import { Header } from "../components/Header";
 import { Api } from "../services/api";
 import { Dimensions, Image } from 'react-native';
+import { Loading } from '../components/Loading';
 
 export function Detalhe({ route }) {
   const [planta, setPlanta] = useState([]);
@@ -48,7 +49,7 @@ export function Detalhe({ route }) {
 
   if(!loading) {
     return (
-      <Text>Carregando.....</Text>
+      <Loading />
     )
   }
 
